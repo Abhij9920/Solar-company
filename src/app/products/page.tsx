@@ -78,12 +78,28 @@ const ProductPage = () => {
                     <p className="text-sm font-semibold text-slate-600">{product.model}</p>
                     <p className="text-sm text-slate-500 flex-grow">{product.description}</p>
                     <div className="flex flex-col gap-1 text-xs text-slate-500 mt-2 border-t pt-3">
-                      {"type" in product && <span>Type: {(product as Record<string, string>).type}</span>}
-                      {"efficiency" in product && <span>Efficiency: {(product as Record<string, string>).efficiency}</span>}
-                      {"capacity" in product && <span>Capacity: {(product as Record<string, string>).capacity}</span>}
-                      {"power" in product && <span>Power: {(product as Record<string, string>).power}</span>}
-                      {"connector" in product && <span>Connector: {(product as Record<string, string>).connector}</span>}
-                      {"warranty" in product && <span>Warranty: {(product as Record<string, string>).warranty}</span>}
+                      {(() => {
+                        // Cast safely using a specific inline type instead of 'any' or generic Record
+                        type ProductSpecs = {
+                          type?: string;
+                          efficiency?: string;
+                          capacity?: string;
+                          power?: string;
+                          connector?: string;
+                          warranty?: string;
+                        };
+                        const p = product as unknown as ProductSpecs;
+                        return (
+                          <>
+                            {p.type && <span>Type: {p.type}</span>}
+                            {p.efficiency && <span>Efficiency: {p.efficiency}</span>}
+                            {p.capacity && <span>Capacity: {p.capacity}</span>}
+                            {p.power && <span>Power: {p.power}</span>}
+                            {p.connector && <span>Connector: {p.connector}</span>}
+                            {p.warranty && <span>Warranty: {p.warranty}</span>}
+                          </>
+                        );
+                      })()}
                     </div>
                   </div>
                 </Card>
