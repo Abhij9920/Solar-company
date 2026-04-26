@@ -78,12 +78,12 @@ const ProductPage = () => {
                     <p className="text-sm font-semibold text-slate-600">{product.model}</p>
                     <p className="text-sm text-slate-500 flex-grow">{product.description}</p>
                     <div className="flex flex-col gap-1 text-xs text-slate-500 mt-2 border-t pt-3">
-                      {"type" in product && <span>Type: {product.type}</span>}
-                      {"efficiency" in product && <span>Efficiency: {product.efficiency}</span>}
-                      {"capacity" in product && <span>Capacity: {product.capacity}</span>}
-                      {"power" in product && <span>Power: {product.power}</span>}
-                      {"connector" in product && <span>Connector: {product.connector}</span>}
-                      {"warranty" in product && <span>Warranty: {product.warranty}</span>}
+                      {"type" in product && <span>Type: {(product as any).type}</span>}
+                      {"efficiency" in product && <span>Efficiency: {(product as any).efficiency}</span>}
+                      {"capacity" in product && <span>Capacity: {(product as any).capacity}</span>}
+                      {"power" in product && <span>Power: {(product as any).power}</span>}
+                      {"connector" in product && <span>Connector: {(product as any).connector}</span>}
+                      {"warranty" in product && <span>Warranty: {(product as any).warranty}</span>}
                     </div>
                   </div>
                 </Card>
