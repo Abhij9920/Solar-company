@@ -13,8 +13,9 @@ export function generateStaticParams() {
 }
 
 // Generate metadata for each blog post
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = BLOG_POSTS.find((p) => p.slug === params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = BLOG_POSTS.find((p) => p.slug === slug);
   if (!post) return { title: "Post Not Found" };
   return {
     title: `${post.title} | Solar Company Blog`,
@@ -22,8 +23,9 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-const BlogPostPage = ({ params }: { params: { slug: string } }) => {
-  const post = BLOG_POSTS.find((p) => p.slug === params.slug);
+const BlogPostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
+  const post = BLOG_POSTS.find((p) => p.slug === slug);
 
   if (!post) {
     notFound();
